@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+//map内部存储的基本对象单元
 type Item struct {
 	Object     interface{}
 	Expiration int64
@@ -32,13 +33,16 @@ const (
 	DefaultExpiration time.Duration = 0
 )
 
+//看不懂
 type Cache struct {
 	*cache
 	// If this is confusing, see the comment at the bottom of New()
 }
 
+//cache实现的结构体
 type cache struct {
 	defaultExpiration time.Duration
+	//内部核心存储功能，通过一个map来存储kv
 	items             map[string]Item
 	mu                sync.RWMutex
 	onEvicted         func(string, interface{})
